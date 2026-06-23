@@ -1,79 +1,175 @@
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Sparkles, Code2, Palette } from "lucide-react"
-import { useEffect, useState } from "react"
+import { ArrowRight, Sparkles } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
+
+const EMOJIS = ["🎉", "🎊", "🎈", "✨", "🎁", "🌟", "💫", "🎶", "🥂", "🎀"]
+const CONFETTI_COLORS = [
+  "#FF0035", "#FFD700", "#FF69B4", "#00CED1", "#FF8C00",
+  "#9B59B6", "#2ECC71", "#E74C3C", "#3498DB", "#F39C12",
+]
+
+interface Particle {
+  id: number
+  x: number
+  y: number
+  size: number
+  color: string
+  speedX: number
+  speedY: number
+  rotation: number
+  rotationSpeed: number
+  opacity: number
+  shape: "rect" | "circle" | "emoji"
+  emoji?: string
+  wobble: number
+  wobbleSpeed: number
+}
+
+interface FloatingEmoji {
+  id: number
+  emoji: string
+  x: number
+  delay: number
+  duration: number
+  size: number
+}
+
+let particleId = 0
 
 export function HeroSection() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const particlesRef = useRef<Particle[]>([])
+  const rafRef = useRef<number>(0)
+  const [floatingEmojis] = useState<FloatingEmoji[]>(() =>
+    Array.from({ length: 12 }, (_, i) => ({
+      id: i,
+      emoji: EMOJIS[i % EMOJIS.length],
+      x: 5 + (i * 8.5) % 90,
+      delay: i * 0.7,
+      duration: 6 + (i % 4) * 1.5,
+      size: 20 + (i % 3) * 10,
+    }))
+  )
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    const resize = () => {
+      canvas.width = canvas.offsetWidth
+      canvas.height = canvas.offsetHeight
     }
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
+    resize()
+    window.addEventListener("resize", resize)
+
+    const spawnBurst = () => {
+      const x = Math.random() * canvas.width
+      const y = Math.random() * canvas.height * 0.5
+      for (let i = 0; i < 18; i++) {
+        const angle = (Math.PI * 2 * i) / 18 + Math.random() * 0.5
+        const speed = 1.5 + Math.random() * 3
+        particlesRef.current.push({
+          id: particleId++,
+          x,
+          y,
+          size: 5 + Math.random() * 8,
+          color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+          speedX: Math.cos(angle) * speed,
+          speedY: Math.sin(angle) * speed - 2,
+          rotation: Math.random() * 360,
+          rotationSpeed: (Math.random() - 0.5) * 8,
+          opacity: 1,
+          shape: Math.random() < 0.3 ? "circle" : "rect",
+          wobble: Math.random() * Math.PI * 2,
+          wobbleSpeed: 0.05 + Math.random() * 0.05,
+        })
+      }
+    }
+
+    spawnBurst()
+    const burstInterval = setInterval(spawnBurst, 1800)
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      particlesRef.current = particlesRef.current.filter(p => p.opacity > 0.02)
+
+      for (const p of particlesRef.current) {
+        p.wobble += p.wobbleSpeed
+        p.x += p.speedX + Math.sin(p.wobble) * 0.5
+        p.y += p.speedY
+        p.speedY += 0.06
+        p.rotation += p.rotationSpeed
+        p.opacity -= 0.007
+
+        ctx.save()
+        ctx.globalAlpha = Math.max(0, p.opacity)
+        ctx.translate(p.x, p.y)
+        ctx.rotate((p.rotation * Math.PI) / 180)
+        ctx.fillStyle = p.color
+
+        if (p.shape === "circle") {
+          ctx.beginPath()
+          ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2)
+          ctx.fill()
+        } else {
+          ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2)
+        }
+        ctx.restore()
+      }
+
+      rafRef.current = requestAnimationFrame(animate)
+    }
+
+    animate()
+
+    return () => {
+      window.removeEventListener("resize", resize)
+      clearInterval(burstInterval)
+      cancelAnimationFrame(rafRef.current)
+    }
   }, [])
 
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          className="absolute w-[500px] h-[500px] rounded-full bg-muted/40 blur-3xl animate-pulse"
-          style={{
-            top: "20%",
-            left: "10%",
-            animationDuration: "4s",
-          }}
-        />
-        <div
-          className="absolute w-[400px] h-[400px] rounded-full bg-muted/30 blur-3xl animate-pulse"
-          style={{
-            bottom: "10%",
-            right: "15%",
-            animationDuration: "6s",
-            animationDelay: "1s",
-          }}
-        />
-        {/* Subtle mouse-following gradient */}
-        <div
-          className="absolute w-[300px] h-[300px] rounded-full bg-muted/20 blur-3xl transition-all duration-1000 ease-out"
-          style={{
-            left: `${mousePosition.x - 150}px`,
-            top: `${mousePosition.y - 150}px`,
-          }}
-        />
+      {/* Canvas confetti background */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        style={{ zIndex: 1 }}
+      />
+
+      {/* Floating emoji balloons */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 2 }}>
+        {floatingEmojis.map((item) => (
+          <span
+            key={item.id}
+            className="absolute select-none"
+            style={{
+              left: `${item.x}%`,
+              bottom: "-60px",
+              fontSize: `${item.size}px`,
+              animation: `heroFloat ${item.duration}s ease-in-out ${item.delay}s infinite`,
+              opacity: 0.55,
+            }}
+          >
+            {item.emoji}
+          </span>
+        ))}
       </div>
 
-      <div className="absolute inset-0 pointer-events-none">
-        <Code2
-          className="absolute text-muted-foreground/30 animate-float"
-          style={{
-            top: "15%",
-            left: "15%",
-            animationDelay: "0s",
-          }}
-          size={40}
-        />
-        <Palette
-          className="absolute text-muted-foreground/30 animate-float"
-          style={{
-            top: "25%",
-            right: "20%",
-            animationDelay: "2s",
-          }}
-          size={35}
-        />
-        <Sparkles
-          className="absolute text-muted-foreground/30 animate-float"
-          style={{
-            bottom: "20%",
-            left: "20%",
-            animationDelay: "1s",
-          }}
-          size={30}
-        />
-      </div>
+      {/* Radial glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 70% 60% at 50% 40%, hsl(350 100% 50% / 0.07) 0%, transparent 70%)",
+          zIndex: 1,
+        }}
+      />
 
-      <div className="container mx-auto text-center max-w-5xl relative z-10">
+      <div className="container mx-auto text-center max-w-5xl relative" style={{ zIndex: 10 }}>
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6 animate-fade-in-up">
           <Sparkles className="w-4 h-4 text-primary" />
           <span className="text-sm font-medium text-primary">Организация праздников и мероприятий под ключ</span>
