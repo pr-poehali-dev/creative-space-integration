@@ -38,10 +38,10 @@ export function ContactSection() {
             Контакты
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-balance">
-            Давайте <span className="text-primary">создавать вместе</span>
+            Давайте <span className="text-primary">создадим праздник</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed">
-            Готовы воплотить ваши цифровые амбиции? Свяжитесь с нами без обязательств и узнайте, чем мы можем помочь.
+            Расскажите о вашем событии — мы свяжемся с вами и предложим идеи для незабываемого праздника. Консультация бесплатна.
           </p>
         </div>
 
@@ -49,7 +49,7 @@ export function ContactSection() {
           <div className="lg:col-span-2">
             <Card className="border-none shadow-xl bg-background">
               <CardHeader>
-                <CardTitle className="text-2xl">Напишите нам</CardTitle>
+                <CardTitle className="text-2xl">Расскажите о вашем празднике</CardTitle>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -107,7 +107,7 @@ export function ContactSection() {
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Расскажите о вашем проекте..."
+                      placeholder="Какой повод, дата, количество гостей и пожелания..."
                       rows={6}
                       required
                       className="transition-all focus:scale-[1.02]"
@@ -160,9 +160,9 @@ export function ContactSection() {
                   <div>
                     <h3 className="font-semibold mb-1">Время работы</h3>
                     <p className="text-sm text-muted-foreground">
-                      Пн - Пт: 9:00 - 18:00
+                      Ежедневно: 10:00 - 21:00
                       <br />
-                      Выходные: по договоренности
+                      Праздники проводим без выходных
                     </p>
                   </div>
                 </div>

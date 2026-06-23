@@ -4,40 +4,40 @@ import { Button } from "@/components/ui/button"
 
 const projects = [
   {
-    title: "Умный помощник по выборам",
-    category: "AI/ML и веб-разработка",
-    image: "/omgekeerdestemwijzer-banner.png",
+    title: "Свадьба в загородной резиденции",
+    category: "Свадьба",
+    image: "https://cdn.poehali.dev/projects/e47969e0-cab0-48f2-ab66-a05bd853db62/files/e457e06c-3f9e-4de0-a035-27eb854d06d3.jpg",
     description:
-      "AI-приложение для выборов. Пользователи задают вопросы о позициях партий и получают 100% фактические ответы из официальных программ с использованием RAG-технологии.",
-    url: "https://de-omgekeerde-stemwijzer.onrender.com/",
-    tags: ["Next.js", "AI/ML", "RAG", "TypeScript"],
+      "Камерная свадьба на 80 гостей под открытым небом. Цветочный декор, гирлянды, живая музыка и фуршет от шеф-повара. Романтика и уют в каждой детали.",
+    url: "#contact",
+    tags: ["Свадьба", "Декор", "Кейтеринг", "Живая музыка"],
   },
   {
-    title: "Автомойка Tahsin",
-    category: "Веб-дизайн и разработка",
-    image: "/autopoetsbedrijf-tahsin-project.png",
+    title: "Закрытая вечеринка в клубе",
+    category: "Вечеринка",
+    image: "https://cdn.poehali.dev/projects/e47969e0-cab0-48f2-ab66-a05bd853db62/files/f049cb9f-4f8d-4ee9-8a15-703c4d0efec9.jpg",
     description:
-      "Профессиональный сайт для автомойки с 20-летним опытом. Полная презентация услуг, автомойки и гаража с современным адаптивным дизайном.",
-    url: "https://www.autopoetsbedrijftahsin.nl/",
-    tags: ["React", "Next.js", "Tailwind CSS"],
+      "Драйвовая тематическая вечеринка на 200 гостей. Топовый диджей, световое шоу, конфетти-пушки и яркая атмосфера до самого утра.",
+    url: "#contact",
+    tags: ["Вечеринка", "DJ", "Свет", "Шоу"],
   },
   {
-    title: "Кадровое агентство CAN",
-    category: "Веб-разработка",
-    image: "/can-uitzendbureau-project.png",
+    title: "Юбилей компании",
+    category: "Корпоратив",
+    image: "https://cdn.poehali.dev/projects/e47969e0-cab0-48f2-ab66-a05bd853db62/files/61baff35-6c06-4374-9b3b-649088bf8035.jpg",
     description:
-      "Кадровое агентство с 30-летним опытом в садоводческом секторе. Сайт с обзором услуг и прямыми контактами для работодателей и соискателей.",
-    url: "https://canbv.nl/",
-    tags: ["Next.js", "React", "Tailwind CSS"],
+      "Торжественный гала-ужин в честь 10-летия компании. Сцена, ведущий, награждение сотрудников и выступление кавер-группы в элегантном зале.",
+    url: "#contact",
+    tags: ["Корпоратив", "Гала-ужин", "Ведущий", "Кавер-группа"],
   },
   {
-    title: "Портфолио Murat Sahin",
-    category: "Портфолио-сайт",
-    image: "/murat-sahin-portfolio.png",
+    title: "Детский день рождения",
+    category: "День рождения",
+    image: "https://cdn.poehali.dev/projects/e47969e0-cab0-48f2-ab66-a05bd853db62/files/82784deb-e634-4069-a1b5-18e3ceb605c7.jpg",
     description:
-      "Профессиональное портфолио full-stack разработчика. Демонстрация проектов, навыков и опыта с современным минималистичным дизайном и темной темой.",
-    url: "https://murat-sahin-dev.vercel.app/",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", ".NET Core"],
+      "Яркий праздник для маленького именинника: аниматоры, шоу мыльных пузырей, воздушные шары и сладкий стол. Море улыбок и счастливых детей.",
+    url: "#contact",
+    tags: ["День рождения", "Аниматоры", "Шоу", "Декор"],
   },
 ]
 
@@ -46,9 +46,9 @@ export function PortfolioSection() {
     <section id="portfolio" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-balance">Наше портфолио</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-balance">Наши мероприятия</h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed">
-            Ознакомьтесь с подборкой наших последних проектов и узнайте, как мы помогаем бизнесу расти с помощью мощных цифровых решений.
+            Подборка праздников, которые мы организовали. Каждое событие — это уникальная история, созданная с любовью к деталям.
           </p>
         </div>
 
@@ -69,9 +69,9 @@ export function PortfolioSection() {
                     size="sm"
                     variant="secondary"
                     className="gap-2"
-                    onClick={() => window.open(project.url, "_blank")}
+                    onClick={() => document.querySelector(project.url)?.scrollIntoView({ behavior: "smooth" })}
                   >
-                    Открыть проект <ExternalLink className="h-4 w-4" />
+                    Хочу так же <ExternalLink className="h-4 w-4" />
                   </Button>
                 </div>
               </div>

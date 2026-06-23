@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter } from "lucide-react"
+import { Send, Instagram, Phone } from "lucide-react"
 
 export function Footer() {
   return (
@@ -6,9 +6,9 @@ export function Footer() {
       <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">CodeCraft</h3>
+            <h3 className="text-xl font-bold mb-4">Праздник</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              2025 CodeCraft. Все права защищены.
+              2025 Праздник. Организация мероприятий под ключ. Все права защищены.
             </p>
           </div>
 
@@ -42,31 +42,29 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Мы в соцсетях</h4>
             <div className="flex gap-4">
               <a
-                href="https://linkedin.com"
+                href="https://t.me"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
-                <Linkedin className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
+                <Send className="h-5 w-5" />
+                <span className="sr-only">Telegram</span>
               </a>
               <a
-                href="https://github.com"
+                href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
-                <Github className="h-5 w-5" />
-                <span className="sr-only">GitHub</span>
+                <Instagram className="h-5 w-5" />
+                <span className="sr-only">Instagram</span>
               </a>
               <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="tel:+79001234567"
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
+                <Phone className="h-5 w-5" />
+                <span className="sr-only">Телефон</span>
               </a>
             </div>
           </div>

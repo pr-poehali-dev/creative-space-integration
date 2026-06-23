@@ -109,17 +109,17 @@ export function QuoteFormDialog({ packageName, variant = "default", className, c
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="package">Тариф *</Label>
+            <Label htmlFor="package">Пакет *</Label>
             <Select
               value={formData.package}
               onValueChange={(value) => setFormData({ ...formData, package: value })}
             >
               <SelectTrigger id="package">
-                <SelectValue placeholder="Выберите тариф" />
+                <SelectValue placeholder="Выберите пакет" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Базовый">Базовый</SelectItem>
-                <SelectItem value="Про">Про</SelectItem>
+                <SelectItem value="Старт">Старт</SelectItem>
+                <SelectItem value="Премиум">Премиум</SelectItem>
                 <SelectItem value="Индивидуальный">Индивидуальный</SelectItem>
                 <SelectItem value="Еще не определился">Еще не определился</SelectItem>
               </SelectContent>
