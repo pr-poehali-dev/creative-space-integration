@@ -177,7 +177,7 @@ export function HeroSection() {
 
         <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 animate-fade-in-up text-balance">
           <span className="text-primary relative inline-block">
-            Праздники
+            Праздники,
             <svg
               className="absolute -bottom-2 left-0 w-full"
               height="12"
@@ -194,7 +194,7 @@ export function HeroSection() {
               />
             </svg>
           </span>
-          {", которые запоминаются"}
+          {" которые запоминаются"}
         </h1>
 
         <p className="text-xl sm:text-2xl text-muted-foreground mb-10 max-w-3xl mx-auto animate-fade-in-up animate-delay-100 leading-relaxed">
