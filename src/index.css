@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,25 +6,25 @@
 
 @layer base {
   :root {
-    /* Custom color palette for CodeCraft light mode */
-    --background: 0 0% 99%;
-    --foreground: 240 10% 10%;
+    /* Светлая тема для event-агенства */
+    --background: 30 30% 97%;
+    --foreground: 240 15% 12%;
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 10%;
+    --card-foreground: 240 15% 12%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 10%;
-    --primary: 350 100% 50%; /* Bright red #FF0035 */
+    --popover-foreground: 240 15% 12%;
+    --primary: 350 100% 50%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 240 5% 95%;
-    --secondary-foreground: 240 10% 10%;
-    --muted: 240 5% 96%;
-    --muted-foreground: 240 5% 45%;
+    --secondary: 30 20% 93%;
+    --secondary-foreground: 240 15% 12%;
+    --muted: 30 15% 93%;
+    --muted-foreground: 240 8% 42%;
     --accent: 350 100% 50%;
     --accent-foreground: 0 0% 100%;
     --destructive: 350 100% 50%;
     --destructive-foreground: 0 0% 100%;
-    --border: 240 5% 90%;
-    --input: 240 5% 90%;
+    --border: 30 15% 87%;
+    --input: 30 15% 87%;
     --ring: 350 100% 50%;
     --radius: 0.5rem;
     --chart-1: 350 100% 50%;
