@@ -1,20 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Heart, PartyPopper, Briefcase, Cake, Music, Camera } from "lucide-react"
+import { PartyPopper, Cake, Music, Camera } from "lucide-react"
 import { useRef, useCallback } from "react"
 
 const services = [
-  {
-    icon: Heart,
-    title: "Свадьбы",
-    description:
-      "Организуем свадьбу вашей мечты под ключ: от выбора площадки и декора до ведущего, артистов и фотографа. Продумаем каждую деталь, чтобы этот день остался самым счастливым в вашей жизни.",
-  },
-  {
-    icon: Briefcase,
-    title: "Корпоративы",
-    description:
-      "Тимбилдинги, новогодние вечера, юбилеи компании и презентации. Создаём атмосферу, которая сплачивает коллектив и укрепляет имидж бренда. Берём на себя всё — от сценария до фуршета.",
-  },
   {
     icon: Cake,
     title: "Дни рождения",
@@ -29,9 +17,9 @@ const services = [
   },
   {
     icon: Music,
-    title: "Артисты и шоу",
+    title: "Мастер-классы и шоу",
     description:
-      "Подберём ведущих, музыкантов, кавер-группы, диджеев и оригинальные шоу-номера. Проверенные исполнители под ваш бюджет, формат и настроение праздника.",
+      "Кулинарные и творческие мастер-классы, оригинальные шоу-номера и интерактивные развлечения. Незабываемые впечатления для гостей любого возраста и формата мероприятия.",
   },
   {
     icon: Camera,
